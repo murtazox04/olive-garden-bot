@@ -1,4 +1,5 @@
 from aiogram import Router, types
+from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.utils.markdown import hbold
 from aiogram.utils.i18n import gettext as _
@@ -17,4 +18,4 @@ async def start(message: types.Message) -> None:
              "доставки {company}!".format(name=name, company=company_name))
     markup = main_menu_keyboard()
 
-    await message.answer(text, reply_markup=markup)
+    await message.answer(text, reply_markup=markup, parse_mode=ParseMode.MARKDOWN)

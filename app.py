@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from aiogram import Dispatcher, types
+from aiogram import types
 from contextlib import asynccontextmanager
 
 from loader import bot, dp, WEBHOOK_PATH, WEBHOOK_URL
@@ -13,25 +13,22 @@ async def lifespan(app: FastAPI):
     dp.include_router(commands_router)
     dp.include_router(callback_queries_router)
     url = await bot.get_webhook_info()
-    print(url)
-    if url != WEBHOOK_URL:
+    if url.url != WEBHOOK_URL:
         await bot.set_webhook(url=WEBHOOK_URL)
 
-    yield
+    yield  # The application will run here
 
     # Shutdown
     await bot.delete_webhook()
     await dp.storage.close()
+    await bot.session.close()  # Ensure the aiohttp session is closed
 
 
 app = FastAPI(title="Olive Garden Delivery Bot", lifespan=lifespan)
 
 
 @app.post(WEBHOOK_PATH)
-async def bot_webhook(update: dict) -> None:
+async def bot_webhook(update: dict):
     telegram_update = types.Update(**update)
-    await Dispatcher._feed_webhook_update(
-        self=dp,
-        bot=bot,
-        update=telegram_update
-    )
+    await dp.feed_update(bot, telegram_update)
+    return {"status": "ok"}

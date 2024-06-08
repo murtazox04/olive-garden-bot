@@ -3,7 +3,7 @@ from decouple import config
 from dto.user import RegisterUser
 from services.api.user import UserService
 
-BASE_URL = config('USER_SERVICE_URL')
+BASE_URL = config('USER_BASE_URL')
 
 
 class AuthService:

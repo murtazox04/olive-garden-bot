@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../olive-garden/.idea/olive-garden.iml" filepath="$PROJECT_DIR$/../olive-garden/.idea/olive-garden.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/olive-garden-bot.iml" filepath="$PROJECT_DIR$/.idea/olive-garden-bot.iml" />
     </modules>
   </component>

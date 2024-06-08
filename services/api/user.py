@@ -2,7 +2,7 @@ import aiohttp
 from typing import Dict
 from decouple import config
 
-BASE_URL = config('USER_SERVICE_URL')
+BASE_URL = config('USER_BASE_URL')
 
 
 class UserService:
